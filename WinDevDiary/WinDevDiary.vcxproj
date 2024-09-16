@@ -74,7 +74,10 @@
     <IncludePath>$(ProjectDir)vendor\ImGui\;$(ProjectDir)vendor\ImGui\backends;$(ProjectDir)vendor\glfw\include;$(ProjectDir)include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir)vendor\ImGui\;$(ProjectDir)vendor\ImGui\backends;$(ProjectDir)vendor\glfw\include;$(ProjectDir)include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)vendor\ImGui\;$(ProjectDir)vendor\ImGui\backends;$(ProjectDir)vendor\glfw\include;$(ProjectDir)include\;C:\Users\Leon\source\repos\WinDevDiary\WinDevDiary\vendor\SQLiteCpp\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnabled>false</VcpkgEnabled>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -168,6 +171,19 @@
     <ClInclude Include="vendor\ImGui\imstb_rectpack.h" />
     <ClInclude Include="vendor\ImGui\imstb_textedit.h" />
     <ClInclude Include="vendor\ImGui\imstb_truetype.h" />
+    <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\Assertion.h" />
+    <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\Backup.h" />
+    <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\Column.h" />
+    <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\Database.h" />
+    <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\Exception.h" />
+    <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\ExecuteMany.h" />
+    <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\Savepoint.h" />
+    <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\SQLiteCpp.h" />
+    <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\SQLiteCppExport.h" />
+    <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\Statement.h" />
+    <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\Transaction.h" />
+    <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\Utils.h" />
+    <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\VariadicBind.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="vendor\glfw\lib-vc2022\glfw3.lib" />
