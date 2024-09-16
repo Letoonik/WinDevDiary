@@ -24,10 +24,8 @@ namespace WDDInterface
 	{
 		getOpenGLWindowSizePos(windowToResize);
 
-		float temp = (float) wWindow / 1270.0f;
-
 		ImGui::SetWindowSize(ImVec2(wWindow * proportion, hWindow), ImGuiCond_Always);
-		ImGui::SetWindowPos(ImVec2(wPosWindow + (posX * temp), hPosWindow + posY), ImGuiCond_Always);
+		ImGui::SetWindowPos(ImVec2(wPosWindow + posX * wWindow / 1280, hPosWindow + posY), ImGuiCond_Always);
 	}
 
 	void displaySidebar(GLFWwindow* windowToResize)
