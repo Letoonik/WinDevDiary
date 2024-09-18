@@ -71,10 +71,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)vendor\ImGui\;$(ProjectDir)vendor\ImGui\backends;$(ProjectDir)vendor\glfw\include;$(ProjectDir)include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)vendor\ImGui\;$(ProjectDir)vendor\ImGui\backends\;$(ProjectDir)vendor\glfw\include\;$(ProjectDir)include\;$(ProjectDir)vendor\SQLiteCpp\include\;C:\Users\Leon\source\repos\WinDevDiary\WinDevDiary\vendor\SQLiteCpp\sqlite3;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir)vendor\ImGui\;$(ProjectDir)vendor\ImGui\backends;$(ProjectDir)vendor\glfw\include;$(ProjectDir)include\;C:\Users\Leon\source\repos\WinDevDiary\WinDevDiary\vendor\SQLiteCpp\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)vendor\ImGui\;$(ProjectDir)vendor\ImGui\backends\;$(ProjectDir)vendor\glfw\include\;$(ProjectDir)include\;$(ProjectDir)vendor\SQLiteCpp\include\;C:\Users\Leon\source\repos\WinDevDiary\WinDevDiary\vendor\SQLiteCpp\sqlite3;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg">
     <VcpkgEnabled>false</VcpkgEnabled>
@@ -120,11 +120,14 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)vendor\glfw\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;SQLiteCpp.lib;sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)vendor\glfw\lib-vc2022;$(ProjectDir)vendor\SQLiteCpp\build\bin\Debug;$(ProjectDir)vendor\SQLiteCpp\build\Debug;vendor\SQLiteCpp\build\sqlite3\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
     </Link>
+    <PostBuildEvent>
+      <Command>call copydlls.bat</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -140,8 +143,10 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)vendor\glfw\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;SQLiteCpp.lib;sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)vendor\glfw\lib-vc2022;$(ProjectDir)vendor\SQLiteCpp\build\bin\Debug;$(ProjectDir)vendor\SQLiteCpp\build\Debug;vendor\SQLiteCpp\build\sqlite3\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -178,7 +183,9 @@
     <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\Exception.h" />
     <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\ExecuteMany.h" />
     <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\Savepoint.h" />
-    <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\SQLiteCpp.h" />
+    <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\SQLiteCpp.h">
+      <DeploymentContent>true</DeploymentContent>
+    </ClInclude>
     <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\SQLiteCppExport.h" />
     <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\Statement.h" />
     <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\Transaction.h" />

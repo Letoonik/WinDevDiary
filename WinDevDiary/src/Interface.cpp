@@ -1,10 +1,9 @@
 #include "imgui.h"
-
+#include "SQLiteCpp/SQLiteCpp.h"
 #include <fstream>
 #include <GLFW/glfw3.h>
 
 #pragma warning(suppress : 6387)
-
 
 using namespace ImGui;
 
@@ -45,16 +44,34 @@ namespace WDDInterface
 
 		SliderFloat(" ", &f, 0.0f, 20.0f);
 
+		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f);
+
 		End();
 	}
 
 	void saveInputedText()
 	{
-		FILE* out_file = NULL;
 
-		fopen_s(&out_file, "hello.txt", "w");
+		try
+		{
+			SQLite::Database db("transaction.db3", SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
 
-		fprintf(out_file, InputedText);
+			db.exec("DROP TABLE IF EXISTS test");
+
+			// Begin transaction
+			SQLite::Transaction transaction(db);
+
+			db.exec("CREATE TABLE test (id INTEGER PRIMARY KEY, value TEXT)");
+
+			int nb = db.exec("INSERT INTO test VALUES (NULL, \"test\")");
+
+			// Commit transaction
+			transaction.commit();
+		}
+		catch (std::exception& e)
+		{
+			Text("OHNO");
+		}
 	}
 
 	void displayTextArea(GLFWwindow* windowToResize)
