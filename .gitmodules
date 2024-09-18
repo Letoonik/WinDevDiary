@@ -5,3 +5,6 @@
 	path = WinDevDiary/vendor/ImGui
 	url = https://github.com/ocornut/imgui
 	branch = docking
+[submodule "WinDevDiary/vendor/SQLiteCpp"]
+	path = WinDevDiary/vendor/SQLiteCpp
+	url = https://github.com/SRombauts/SQLiteCpp
