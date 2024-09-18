@@ -128,6 +128,9 @@
     <PostBuildEvent>
       <Command>call copydlls.bat</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>cd vendor\SQLiteCpp &amp;&amp; call build.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
