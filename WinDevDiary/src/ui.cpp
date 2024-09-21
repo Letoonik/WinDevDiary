@@ -1,9 +1,9 @@
 #include "imgui.h"
-#include "SQLiteCpp/SQLiteCpp.h"
-#include <fstream>
+#include "diaryIO.hpp"
+#include "imgui_stdlib.h"
+#include <string>
 #include <GLFW/glfw3.h>
 
-#pragma warning(suppress : 6387)
 
 using namespace ImGui;
 
@@ -11,7 +11,8 @@ namespace WDDInterface
 {
 	float f = 0.0f;
 	float fdisplay = 0.0f;
-	static char InputedText[128000] = "Hello, world!";
+	std::string InputedText;
+	std::string* ptrInputedText = &InputedText;
 	int wWindow, hWindow, wPosWindow, hPosWindow;
 
 	void getOpenGLWindowSizePos(GLFWwindow* windowToResize) 
@@ -49,31 +50,6 @@ namespace WDDInterface
 		End();
 	}
 
-	void saveInputedText()
-	{
-
-		try
-		{
-			SQLite::Database db("transaction.db3", SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
-
-			db.exec("DROP TABLE IF EXISTS test");
-
-			// Begin transaction
-			SQLite::Transaction transaction(db);
-
-			db.exec("CREATE TABLE test (id INTEGER PRIMARY KEY, value TEXT)");
-
-			int nb = db.exec("INSERT INTO test VALUES (NULL, \"test\")");
-
-			// Commit transaction
-			transaction.commit();
-		}
-		catch (std::exception& e)
-		{
-			Text("OHNO");
-		}
-	}
-
 	void displayTextArea(GLFWwindow* windowToResize)
 	{
 		Begin("Textarea", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove);
@@ -82,10 +58,13 @@ namespace WDDInterface
 
 		SeparatorText("Text Area");
 
-		InputTextMultiline(" ", InputedText, IM_ARRAYSIZE(InputedText), ImVec2(GetWindowWidth() * 0.95, 300));
+		InputTextMultiline(" ", ptrInputedText, ImVec2(GetWindowWidth() * 0.95, 300));
 
 		if (Button("Save"))
-			saveInputedText();
+			WDDsave::saveDiaryEntry(InputedText);
+
+		if (Button("Load"))
+			InputedText = WDDsave::loadDiaryEntry();
 
 		End();
 	}

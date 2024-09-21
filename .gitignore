@@ -3,7 +3,8 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-#ImGui specific files
+#WinDevDiary Specific
+/WinDevDiary/example.json
 imgui.ini
 
 # User-specific files
@@ -364,4 +365,3 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/WinDevDiary/example.json

@@ -71,7 +71,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)vendor\ImGui\;$(ProjectDir)vendor\ImGui\backends\;$(ProjectDir)vendor\glfw\include\;$(ProjectDir)include\;$(ProjectDir)vendor\SQLiteCpp\include\;C:\Users\Leon\source\repos\WinDevDiary\WinDevDiary\vendor\SQLiteCpp\sqlite3;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)vendor\ImGui\;$(ProjectDir)vendor\ImGui\backends\;$(ProjectDir)vendor\glfw\include\;$(ProjectDir)vendor\json\include;$(ProjectDir)vendor\ImGui\misc\cpp;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(ProjectDir)vendor\ImGui\;$(ProjectDir)vendor\ImGui\backends\;$(ProjectDir)vendor\glfw\include\;$(ProjectDir)include\;$(ProjectDir)vendor\SQLiteCpp\include\;C:\Users\Leon\source\repos\WinDevDiary\WinDevDiary\vendor\SQLiteCpp\sqlite3;$(IncludePath)</IncludePath>
@@ -120,16 +120,18 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;SQLiteCpp.lib;sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)vendor\glfw\lib-vc2022;$(ProjectDir)vendor\SQLiteCpp\build\bin\Debug;$(ProjectDir)vendor\SQLiteCpp\build\Debug;vendor\SQLiteCpp\build\sqlite3\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)vendor\glfw\lib-vc2022;$(ProjectDir)vendor\SQLiteCpp\build\bin\Debug;$(ProjectDir)vendor\SQLiteCpp\build\Debug;vendor\SQLiteCpp\build\sqlite3\Debug;$(ProjectDir)vendor\yaml-cpp\Release\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
-      <Command>call copydlls.bat</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>cd vendor\SQLiteCpp &amp;&amp; call build.bat</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -153,7 +155,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Interface.cpp" />
+    <ClCompile Include="src\diaryIO.cpp" />
+    <ClCompile Include="src\ui.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="vendor\ImGui\backends\imgui_impl_glfw.cpp" />
     <ClCompile Include="vendor\ImGui\backends\imgui_impl_opengl3.cpp" />
@@ -163,9 +166,11 @@
     <ClCompile Include="vendor\ImGui\imgui_draw.cpp" />
     <ClCompile Include="vendor\ImGui\imgui_tables.cpp" />
     <ClCompile Include="vendor\ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="vendor\ImGui\misc\cpp\imgui_stdlib.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Interface.h" />
+    <ClInclude Include="src\diaryIO.hpp" />
+    <ClInclude Include="src\ui.hpp" />
     <ClInclude Include="vendor\glfw\include\GLFW\glfw3.h" />
     <ClInclude Include="vendor\glfw\include\GLFW\glfw3native.h" />
     <ClInclude Include="vendor\ImGui\backends\imgui_impl_glfw.h" />
@@ -179,6 +184,52 @@
     <ClInclude Include="vendor\ImGui\imstb_rectpack.h" />
     <ClInclude Include="vendor\ImGui\imstb_textedit.h" />
     <ClInclude Include="vendor\ImGui\imstb_truetype.h" />
+    <ClInclude Include="vendor\ImGui\misc\cpp\imgui_stdlib.h" />
+    <ClInclude Include="vendor\json\include\nlohmann\adl_serializer.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\byte_container_with_subtype.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\abi_macros.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\conversions\from_json.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\conversions\to_chars.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\conversions\to_json.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\exceptions.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\hash.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\input\binary_reader.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\input\input_adapters.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\input\json_sax.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\input\lexer.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\input\parser.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\input\position_t.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\iterators\internal_iterator.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\iterators\iteration_proxy.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\iterators\iterator_traits.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\iterators\iter_impl.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\iterators\json_reverse_iterator.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\iterators\primitive_iterator.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\json_custom_base_class.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\json_pointer.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\json_ref.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\macro_scope.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\macro_unscope.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\meta\call_std\begin.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\meta\call_std\end.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\meta\cpp_future.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\meta\detected.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\meta\identity_tag.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\meta\is_sax.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\meta\std_fs.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\meta\type_traits.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\meta\void_t.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\output\binary_writer.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\output\output_adapters.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\output\serializer.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\string_concat.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\string_escape.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\detail\value_t.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\json.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\json_fwd.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\ordered_map.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\thirdparty\hedley\hedley.hpp" />
+    <ClInclude Include="vendor\json\include\nlohmann\thirdparty\hedley\hedley_undef.hpp" />
     <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\Assertion.h" />
     <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\Backup.h" />
     <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\Column.h" />
@@ -194,6 +245,43 @@
     <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\Transaction.h" />
     <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\Utils.h" />
     <ClInclude Include="vendor\SQLiteCpp\include\SQLiteCpp\VariadicBind.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\anchor.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\binary.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\contrib\anchordict.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\contrib\graphbuilder.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\depthguard.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\dll.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\emitfromevents.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\emitter.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\emitterdef.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\emittermanip.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\emitterstyle.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\eventhandler.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\exceptions.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\mark.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\node\convert.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\node\detail\impl.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\node\detail\iterator.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\node\detail\iterator_fwd.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\node\detail\memory.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\node\detail\node.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\node\detail\node_data.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\node\detail\node_iterator.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\node\detail\node_ref.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\node\emit.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\node\impl.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\node\iterator.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\node\node.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\node\parse.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\node\ptr.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\node\type.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\noexcept.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\null.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\ostream_wrapper.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\parser.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\stlemitter.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\traits.h" />
+    <ClInclude Include="vendor\yaml-cpp\include\yaml-cpp\yaml.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="vendor\glfw\lib-vc2022\glfw3.lib" />
