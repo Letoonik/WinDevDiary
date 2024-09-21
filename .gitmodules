@@ -8,3 +8,9 @@
 [submodule "WinDevDiary/vendor/SQLiteCpp"]
 	path = WinDevDiary/vendor/SQLiteCpp
 	url = https://github.com/SRombauts/SQLiteCpp
+[submodule "WinDevDiary/vendor/yaml-cpp"]
+	path = WinDevDiary/vendor/yaml-cpp
+	url = https://github.com/jbeder/yaml-cpp.git
+[submodule "WinDevDiary/vendor/json"]
+	path = WinDevDiary/vendor/json
+	url = https://github.com/nlohmann/json.git
