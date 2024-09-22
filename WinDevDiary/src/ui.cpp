@@ -7,6 +7,9 @@
 
 using namespace ImGui;
 
+extern bool isEncrypted = true;
+extern std::string password;
+
 namespace WDDInterface
 {
 	float f = 0.0f;
@@ -14,6 +17,7 @@ namespace WDDInterface
 	std::string InputedText;
 	std::string* ptrInputedText = &InputedText;
 	int wWindow, hWindow, wPosWindow, hPosWindow;
+
 
 	void getOpenGLWindowSizePos(GLFWwindow* windowToResize) 
 	{
@@ -65,6 +69,12 @@ namespace WDDInterface
 
 		if (Button("Load"))
 			InputedText = WDDsave::loadDiaryEntry();
+		
+		Checkbox("Encryption", &isEncrypted);
+
+		if(isEncrypted)
+			InputText("Password", &password, ImGuiInputTextFlags_Password);
+
 
 		End();
 	}

@@ -71,7 +71,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)vendor\ImGui\;$(ProjectDir)vendor\ImGui\backends\;$(ProjectDir)vendor\glfw\include\;$(ProjectDir)vendor\json\include;$(ProjectDir)vendor\ImGui\misc\cpp;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)vendor\ImGui\;$(ProjectDir)vendor\ImGui\backends\;$(ProjectDir)vendor\glfw\include\;$(ProjectDir)vendor\json\include\;$(ProjectDir)vendor\ImGui\misc\cpp\;$(ProjectDir)vendor\libsodium\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(ProjectDir)vendor\ImGui\;$(ProjectDir)vendor\ImGui\backends\;$(ProjectDir)vendor\glfw\include\;$(ProjectDir)include\;$(ProjectDir)vendor\SQLiteCpp\include\;C:\Users\Leon\source\repos\WinDevDiary\WinDevDiary\vendor\SQLiteCpp\sqlite3;$(IncludePath)</IncludePath>
@@ -120,8 +120,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)vendor\glfw\lib-vc2022;$(ProjectDir)vendor\SQLiteCpp\build\bin\Debug;$(ProjectDir)vendor\SQLiteCpp\build\Debug;vendor\SQLiteCpp\build\sqlite3\Debug;$(ProjectDir)vendor\yaml-cpp\Release\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;libsodium.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)vendor\glfw\lib-vc2022;$(ProjectDir)vendor\libsodium\x64\Release\v143\dynamic\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
     </Link>
@@ -156,6 +156,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\diaryIO.cpp" />
+    <ClCompile Include="src\error.cpp" />
     <ClCompile Include="src\ui.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="vendor\ImGui\backends\imgui_impl_glfw.cpp" />
@@ -170,6 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\diaryIO.hpp" />
+    <ClInclude Include="src\error.hpp" />
     <ClInclude Include="src\ui.hpp" />
     <ClInclude Include="vendor\glfw\include\GLFW\glfw3.h" />
     <ClInclude Include="vendor\glfw\include\GLFW\glfw3native.h" />
