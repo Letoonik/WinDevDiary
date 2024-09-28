@@ -5,6 +5,7 @@
 
 #WinDevDiary Specific
 /WinDevDiary/example.json
+/WinDevDiary/example.enc
 imgui.ini
 
 # User-specific files
@@ -365,4 +366,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/WinDevDiary/example.enc
+
