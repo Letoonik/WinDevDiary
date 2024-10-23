@@ -14,3 +14,9 @@
 [submodule "WinDevDiary/vendor/json"]
 	path = WinDevDiary/vendor/json
 	url = https://github.com/nlohmann/json.git
+[submodule "WinDevDiary/vendor/libsodium"]
+	path = WinDevDiary/vendor/libsodium
+	url = https://github.com/jedisct1/libsodium
+[submodule "WinDevDiary/Vendor/botan"]
+	path = WinDevDiary/Vendor/botan
+	url = https://github.com/randombit/botan.git
