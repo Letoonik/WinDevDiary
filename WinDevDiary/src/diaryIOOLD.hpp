@@ -3,8 +3,6 @@
 
 namespace WDDsave
 {
-	std::string encryptEntryFile(std::string entryToEncrypt);
-	std::string decryptEntryFile(std::string entryToDecrypt);
 	int saveDiaryEntry(std::string textData);
 	std::string loadDiaryEntry();
 }

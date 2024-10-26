@@ -1,4 +1,4 @@
-#include "imgui.h"
+﻿#include "imgui.h"
 #include "diaryIO.hpp"
 #include "imgui_stdlib.h"
 #include <string>
@@ -15,22 +15,21 @@ namespace WDDInterface
 	float f = 0.0f;
 	float fdisplay = 0.0f;
 	std::string InputedText;
-	std::string* ptrInputedText = &InputedText;
-	int wWindow, hWindow, wPosWindow, hPosWindow;
+	int widthWindow, heightWindow, xPosWindow, yPosWindow;
 
 
 	void getOpenGLWindowSizePos(GLFWwindow* windowToResize) 
 	{
-		glfwGetFramebufferSize(windowToResize, &wWindow, &hWindow);
-		glfwGetWindowPos(windowToResize, &wPosWindow, &hPosWindow);
+		glfwGetFramebufferSize(windowToResize, &widthWindow, &heightWindow);
+		glfwGetWindowPos(windowToResize, &xPosWindow, &yPosWindow);
 	}
 
 	void updateWindowSizePos(GLFWwindow* windowToResize, int posX, int posY, float proportion)
 	{
 		getOpenGLWindowSizePos(windowToResize);
 
-		ImGui::SetWindowSize(ImVec2(wWindow * proportion, hWindow), ImGuiCond_Always);
-		ImGui::SetWindowPos(ImVec2(wPosWindow + posX * wWindow / 1280, hPosWindow + posY), ImGuiCond_Always);
+		ImGui::SetWindowSize(ImVec2(widthWindow * proportion, heightWindow), ImGuiCond_Always);
+		ImGui::SetWindowPos(ImVec2(xPosWindow + posX * widthWindow / 1280, yPosWindow + posY), ImGuiCond_Always);
 	}
 
 	void displaySidebar(GLFWwindow* windowToResize)
@@ -62,7 +61,7 @@ namespace WDDInterface
 
 		SeparatorText("Text Area");
 
-		InputTextMultiline(" ", ptrInputedText, ImVec2(GetWindowWidth() * 0.95, 300));
+		InputTextMultiline(" ", &InputedText, ImVec2(GetWindowWidth() * 0.95, GetWindowHeight() * 0.6));
 
 		if (Button("Save"))
 			WDDsave::saveDiaryEntry(InputedText);
