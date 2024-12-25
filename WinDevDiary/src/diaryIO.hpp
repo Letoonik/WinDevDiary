@@ -1,10 +1,13 @@
 #pragma once
 #include <string>
+#include "nlohmann/json.hpp"
 
-namespace WDDsave
+using json = nlohmann::json;
+
+namespace WDDio
 {
 	std::string encryptEntryFile(std::string entryToEncrypt);
 	std::string decryptEntryFile(std::string entryToDecrypt);
-	int saveDiaryEntry(std::string textData);
-	std::string loadDiaryEntry();
+	json loadDiaryEntries();
+	int saveDiaryEntry(std::string textData, std::string entryTitle);
 }
