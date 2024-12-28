@@ -7,6 +7,7 @@
 // - Documentation        https://dearimgui.com/docs (same as your local docs/ folder).
 // - Introduction, links and more at the top of imgui.cpp
 
+
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -35,6 +36,7 @@ static void glfw_error_callback(int error, const char* description)
 {
     fprintf(stderr, "GLFW Error %d: %s\n", error, description);
 }
+
 
 // Main code
 int main(int, char**)
@@ -156,7 +158,7 @@ int main(int, char**)
         ImGui::NewFrame();
 
         // My Code
-
+        ImGui::DockSpaceOverViewport();
         WDDInterface::displaySidebar(window);
         WDDInterface::displayTextArea(window);
 
@@ -234,4 +236,8 @@ int main(int, char**)
     glfwTerminate();
 
     return 0;
+}
+//For release build without console window
+int WinMain(int a, char** b) {
+    main(a, b);
 }

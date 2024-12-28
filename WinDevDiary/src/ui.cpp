@@ -4,9 +4,9 @@
 #include <string>
 #include <GLFW/glfw3.h>
 #include "nlohmann/json.hpp"
+#include "ui.hpp"
 
 using json = nlohmann::json;
-using namespace ImGui;
 
 extern bool isEncrypted = true;
 extern std::string password;
@@ -14,93 +14,64 @@ bool loadDiary = true; // todo: remove later
 
 namespace WDDInterface
 {
-	float f = 0.0f;
-	float fdisplay = 0.0f;
 	std::string InputedText;
 	std::string InputedTitle;
-	int widthWindow, heightWindow, xPosWindow, yPosWindow;
-
-
-	void getOpenGLWindowSizePos(GLFWwindow* windowToResize) 
-	{
-		glfwGetFramebufferSize(windowToResize, &widthWindow, &heightWindow);
-		glfwGetWindowPos(windowToResize, &xPosWindow, &yPosWindow);
-	}
-
-	void updateWindowSizePos(GLFWwindow* windowToResize, int posX, int posY, float proportion)
-	{
-		getOpenGLWindowSizePos(windowToResize);
-
-		ImGui::SetWindowSize(ImVec2(widthWindow * proportion, heightWindow), ImGuiCond_Always);
-		ImGui::SetWindowPos(ImVec2(xPosWindow + posX * widthWindow / 1280, yPosWindow + posY), ImGuiCond_Always);
-	}
 
 	void displaySidebar(GLFWwindow* windowToResize)
 	{
 		json entries = WDDio::loadDiaryEntries();
 		int entriesSize = entries["entries"].size();
 
-		Begin("Sidebar", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove);
+		ImGui::Begin("Sidebar", nullptr);
 
-		updateWindowSizePos(windowToResize, 0, 0, 0.25);
-		Text("Entries");
+		ImGui::Text("Entries");
 		bool date = true;
-
-		if (BeginTable("table1", 3, ImGuiTableFlags_Borders))
+		// Render Sidebar entries
+		if (ImGui::BeginTable("entriesTable", 2, ImGuiTableFlags_Borders))
 		{
 			for (int row = 0; row < entriesSize; row++)
 			{
-				TableNextRow();
+				ImGui::TableNextRow();
 				for (int column = 0; column < 2; column++)
 				{
-					TableSetColumnIndex(column);
+					ImGui::TableSetColumnIndex(column);
 
 					if (column == 0) {
 						std::string e = entries["entries"][row]["title"];
-						Button(e.c_str());
+						if (ImGui::Button(e.c_str())) {
+							InputedText = WDDio::loadEntry(row, entries);
+							InputedTitle = e;
+						}
 					}
 					if (column == 1) {
 						std::string e = entries["entries"][row]["date"];
-						Text(e.c_str());
+						ImGui::Text(e.c_str());
 					}
 				}
 			}
-			EndTable();
+			ImGui::EndTable();
 		}
-		//Text("%f", fdisplay);
-		//if (Button("+"))
-		//	fdisplay += f;
-		//if (Button("-"))
-		//	fdisplay -= f;
-		//Text("Input your number to add/subtract");
-		//SetItemTooltip("Was ist das denn");
-
-		//SliderFloat(" ", &f, 0.0f, 20.0f);
-
-		//ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f);
-
-		End();
+		ImGui::End();
 	}
 
 	void displayTextArea(GLFWwindow* windowToResize)
 	{
-		Begin("Textarea", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove);
+		ImGui::Begin("Textarea", nullptr);
 
-		updateWindowSizePos(windowToResize, 320, 0, 0.75);
+		ImGui::SeparatorText("Title");
+		ImGui::InputText("##xx", &InputedTitle);
 
-		SeparatorText("Title");
-		InputText("##xx", &InputedTitle);
+		ImGui::SeparatorText("Text Area");
+		ImGui::InputTextMultiline("##xxx", &InputedText, ImVec2(ImGui::GetWindowWidth() * 0.95, ImGui::GetWindowHeight() * 0.6));
 
-		SeparatorText("Text Area");
-		InputTextMultiline("##xxx", &InputedText, ImVec2(GetWindowWidth() * 0.95, GetWindowHeight() * 0.6));
-
-		if (Button("Save"))
+		if (ImGui::Button("Save"))
 			WDDio::saveDiaryEntry(InputedText, InputedTitle);
 		
-		Checkbox("Encryption", &isEncrypted);
-		isEncrypted = false;
+		ImGui::Checkbox("Encryption", &isEncrypted);
+		isEncrypted = false; //TODO: Make encryption (it is disabled for now)
+
 		if(isEncrypted)
-			InputText("Password", &password, ImGuiInputTextFlags_Password);
-		End();
+			ImGui::InputText("Password", &password, ImGuiInputTextFlags_Password);
+		ImGui::End();
 	}
 }

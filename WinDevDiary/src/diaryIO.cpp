@@ -14,6 +14,7 @@
 #include <botan/kdf.h>
 #include <botan/auto_rng.h>
 #include <botan/mem_ops.h>
+#include "diaryIO.hpp"
 
 using json = nlohmann::json;
 
@@ -91,47 +92,26 @@ namespace WDDio
 
 	json loadDiaryEntries()
 	{
+		json data;
+		std::ifstream jsonFile;
+		std::string vec;
 
-		//if(isEncrypted)
-		//{
-		//	//return decryptEntry();
-		//	return "TEMP";
-		//}
-		//else
-		//{
-		//	json data;
-		//	std::ifstream jsonFile;
-		//	std::string vec;
+		jsonFile.open("main.json");
 
-		//	jsonFile.open("main.json");
-
-		//	if (jsonFile.is_open())
-		//	{
-		//		jsonFile >> data;
-		//		jsonFile.close();
-		//	}
-		//	else
-		//	{
-		//		return "Failed to load/open JSON file";
-		//	}
-		//	return data;
-		//}
-	json data;
-	std::ifstream jsonFile;
-	std::string vec;
-
-	jsonFile.open("main.json");
-
-	if (jsonFile.is_open())
-	{
-		jsonFile >> data;
-		vec = data["entries"][0]["date"];
-		jsonFile.close();
+		if (jsonFile.is_open())
+		{
+			jsonFile >> data;
+			vec = data["entries"][0]["date"];
+			jsonFile.close();
+		}
+		else
+		{
+			return "Failed to load/open JSON file";
+		}
+		return data;
 	}
-	else
-	{
-		return "Failed to load/open JSON file";
-	}
-	return data;
+
+	std::string loadEntry(int entriesIndex, json jsonData) {
+		return jsonData["entries"][entriesIndex]["text"];
 	}
 }
