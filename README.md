@@ -2,7 +2,7 @@
 
 A Diary Application specifically made for developers! Made with C++ and ImGui/GLFW
 
-### Current Status: It is usable, but very limited at the moment
+### Current Status: It is barely usable and very limited at the moment, but it works.
 
 ***
 
