@@ -159,8 +159,8 @@ int main(int, char**)
 
         // My Code
         ImGui::DockSpaceOverViewport();
-        WDDInterface::displaySidebar(window);
-        WDDInterface::displayTextArea(window);
+        WDDInterface::displaySidebar();
+        WDDInterface::displayTextArea();
 
         // END My Code
 

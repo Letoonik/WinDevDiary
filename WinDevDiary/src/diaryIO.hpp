@@ -8,7 +8,7 @@ namespace WDDio
 {
 	std::string encryptEntryFile(std::string entryToEncrypt);
 	std::string decryptEntryFile(std::string entryToDecrypt);
-	json loadDiaryEntries();
 	std::string loadEntry(int entriesIndex, json jsonData);
+	json loadDiaryEntries();
 	int saveDiaryEntry(std::string textData, std::string entryTitle);
 }

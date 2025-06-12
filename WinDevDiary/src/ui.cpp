@@ -17,7 +17,7 @@ namespace WDDInterface
 	std::string InputedText;
 	std::string InputedTitle;
 
-	void displaySidebar(GLFWwindow* windowToResize)
+	void displaySidebar()
 	{
 		json entries = WDDio::loadDiaryEntries();
 		int entriesSize = entries["entries"].size();
@@ -54,7 +54,7 @@ namespace WDDInterface
 		ImGui::End();
 	}
 
-	void displayTextArea(GLFWwindow* windowToResize)
+	void displayTextArea()
 	{
 		ImGui::Begin("Textarea", nullptr);
 
@@ -65,6 +65,9 @@ namespace WDDInterface
 		ImGui::InputTextMultiline("##xxx", &InputedText, ImVec2(ImGui::GetWindowWidth() * 0.95, ImGui::GetWindowHeight() * 0.6));
 
 		if (ImGui::Button("Save"))
+			WDDio::saveDiaryEntry(InputedText, InputedTitle);
+
+		if (ImGui::Button("New"))
 			WDDio::saveDiaryEntry(InputedText, InputedTitle);
 		
 		ImGui::Checkbox("Encryption", &isEncrypted);
