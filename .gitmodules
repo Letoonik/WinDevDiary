@@ -1,25 +1,24 @@
 [submodule "WinDevDiary/vendor/imgui"]
 	path = WinDevDiary/vendor/imgui
 	url = https://github.com/ocornut/imgui
-[submodule "WinDevDiary/vendor/ImGui"]
-	path = WinDevDiary/vendor/ImGui
-	url = https://github.com/ocornut/imgui
-	branch = docking
 [submodule "WinDevDiary/vendor/SQLiteCpp"]
 	path = WinDevDiary/vendor/SQLiteCpp
 	url = https://github.com/SRombauts/SQLiteCpp
 [submodule "WinDevDiary/vendor/yaml-cpp"]
 	path = WinDevDiary/vendor/yaml-cpp
 	url = https://github.com/jbeder/yaml-cpp.git
-[submodule "WinDevDiary/vendor/json"]
-	path = WinDevDiary/vendor/json
-	url = https://github.com/nlohmann/json.git
 [submodule "WinDevDiary/vendor/libsodium"]
 	path = WinDevDiary/vendor/libsodium
 	url = https://github.com/jedisct1/libsodium
 [submodule "WinDevDiary/Vendor/botan"]
 	path = WinDevDiary/Vendor/botan
 	url = https://github.com/randombit/botan.git
-[submodule "WinDevDiary/vendor/glfw"]
-	path = WinDevDiary/vendor/glfw
+[submodule "vendor/ImGui"]
+	path = vendor/ImGui
+	url = https://github.com/ocornut/imgui.git
+[submodule "vendor/json"]
+	path = vendor/json
+	url = https://github.com/nlohmann/json.git
+[submodule "vendor/glfw"]
+	path = vendor/glfw
 	url = https://github.com/glfw/glfw.git
