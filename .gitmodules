@@ -20,3 +20,6 @@
 [submodule "WinDevDiary/Vendor/botan"]
 	path = WinDevDiary/Vendor/botan
 	url = https://github.com/randombit/botan.git
+[submodule "WinDevDiary/vendor/glfw"]
+	path = WinDevDiary/vendor/glfw
+	url = https://github.com/glfw/glfw.git
